@@ -1,0 +1,28 @@
+{
+  "name": "AmongLegends",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Baptiiiiste/AmongLegends.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Baptiiiiste/AmongLegends/issues"
+  },
+  "homepage": "https://github.com/Baptiiiiste/AmongLegends#readme",
+  "dependencies": {
+    "chalk": "4.1.2",
+    "dayjs": "^1.11.6",
+    "discord.js": "^14.0.3",
+    "dotenv": "16.0.0",
+    "glob": "7.2.0",
+    "ms": "2.1.3"
+  }
+}
