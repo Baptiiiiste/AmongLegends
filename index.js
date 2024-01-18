@@ -24,8 +24,5 @@ process.on('unhandledRejection', (reason, promise) => {
 
 process.on('warning', (...args) => { Logger.warn(...args); });
 
-// Game
-client.gameInstance = new Game();
-
 // Login
 client.login(process.env.DISCORD_TOKEN);

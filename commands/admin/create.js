@@ -1,4 +1,5 @@
-const { Status } = require("../../models/Status");
+const { Game } = require("../../models/Game");
+const { getAdminEmbed, getAdminButtons } = require("../../utils/embeds/adminEmbed");
 
 module.exports = {
     name: 'create',
@@ -10,8 +11,20 @@ module.exports = {
 
     async runInteraction(client, interaction)  {
 
-        interaction.reply({ content: `Status : ${client.gameInstance.status.value ?? "none"}`, ephemeral: true });
-        client.gameInstance.status = Status.WAITING_TO_START;
+        // Create a new game instance
+        client.gameInstance = new Game(interaction.user);
+
+        const adminEmbed = getAdminEmbed(client.gameInstance, interaction.user);
+        const adminButtons = getAdminButtons(client.gameInstance);
+
+        await interaction.reply({ 
+            embeds: [adminEmbed],
+            components: adminButtons, 
+        });
+
+        client.gameInstance.adminEmbed = await interaction.fetchReply()
+        
+        
     }
 };
 

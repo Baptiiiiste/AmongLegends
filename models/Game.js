@@ -5,6 +5,8 @@ class Game {
     status = Status.NOT_STARTED
     arePlayersVoting = false
 
+    gameAdminDiscordInstance
+
     gameEmbed = null
     adminEmbed = null
 
@@ -20,7 +22,9 @@ class Game {
         lastActionMade: "Click a button first"
     }
 
-    constructor() {}
+    constructor(gameAdminDiscordInstance) {
+        this.gameAdminDiscordInstance = gameAdminDiscordInstance
+    }
 
     saveConfiguration() {
         this.status = Status.WAITING_TO_START;

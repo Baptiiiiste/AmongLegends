@@ -5,7 +5,7 @@ module.exports = {
     once: false,
     async execute(client, interaction) {
 
-        if(interaction.type === InteractionType.ApplicationCommand || interaction.isContextMenu()){
+        if(interaction.type === InteractionType.ApplicationCommand){
             const cmd = client.commands.get(interaction.commandName);
             if(!cmd) return interaction.reply({content: `❌ This command does not exist`, ephemeral: true});
             
@@ -20,11 +20,10 @@ module.exports = {
             if(!btn) return interaction.reply({content: "❌ This button does not exist", ephemeral:true});
             btn.runInteraction(client, interaction);
 
-        }else if (interaction.isSelectMenu()){
+        } else if (interaction.isSelectMenu()){
             const slctMenu = client.selectMenu.get(interaction.customId);
             if(!slctMenu) return interaction.reply({content: "❌ This selectMenu does not exist", ephemeral: true});
             slctMenu.runInteraction(client, interaction);
-
         }
         
     }
