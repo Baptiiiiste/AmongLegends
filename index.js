@@ -3,7 +3,6 @@ const client = new Client( { intents: 1539, partials: [Partials.Message, Partial
 const dotenv = require('dotenv');
 dotenv.config();
 const Logger = require("./utils/Logger");
-const { Game } = require("./models/Game");
 
 // Registering collections and handlers
 ['commands', 'buttons', 'selectMenu'].forEach(x => client[x] = new Collection());
