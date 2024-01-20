@@ -5,7 +5,7 @@ class Game {
     status = Status.NOT_STARTED
     arePlayersVoting = false
 
-    gameAdminDiscordInstance
+    gameAdminDiscordInstance = null
 
     gameEmbed = null
     adminEmbed = null
@@ -24,32 +24,6 @@ class Game {
 
     constructor(gameAdminDiscordInstance) {
         this.gameAdminDiscordInstance = gameAdminDiscordInstance
-    }
-
-    saveConfiguration() {
-        this.status = Status.WAITING_TO_START;
-    }
-
-    startGame() {
-        this.status = Status.STARTED;
-        this.startedGameTime = new Date();
-        // TODO Manage to start the orders
-
-    }
-
-    pauseGame() {
-        this.status = Status.PAUSED;
-        // TODO Manage to stop the orders
-    }
-
-    resumeGame() {
-        this.status = Status.STARTED;
-        // TODO Manage to resume the orders
-    }
-
-    finishGame() {
-        this.status = Status.FINISHED;
-        // TODO Manage to stop the orders
     }
 
 }
