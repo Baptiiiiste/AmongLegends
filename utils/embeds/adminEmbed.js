@@ -1,11 +1,12 @@
-const { ButtonBuilder, Colors, EmbedBuilder, ActionRowBuilder, SelectMenuBuilder, SelectMenuOptionBuilder } = require("discord.js");
+const { ButtonBuilder, Colors, EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder } = require("discord.js");
 const { Status } = require("../../models/Status");
 
-function getAdminEmbed(gameInstance, gameAdminDiscordInstance) {
+function getAdminEmbed(gameInstance) {
+
     const embed = new EmbedBuilder()
         .setColor(Colors.Blue)
         .setTitle('Among Legends Control Panel')
-        .setDescription(`👋 Hi **${gameAdminDiscordInstance}**, configure your game with the buttons below`)
+        .setDescription(`👋 Hi **${gameInstance.gameAdminDiscordInstance}**, configure your game with the buttons below`)
         .addFields([
             { name: ` `, value: ` `, inline: false },
 
@@ -15,13 +16,13 @@ function getAdminEmbed(gameInstance, gameAdminDiscordInstance) {
 
             { name: ` `, value: ` `, inline: false },
 
-            { name: `👥 Multiple players for a role: **${gameInstance.parameters.authorizeMultiplePlayerToARole}**`, value: `Edit with *Authorize* button below`, inline: true },
+            { name: `👥 Multiple players for a role: **${gameInstance.parameters.authorizeMultiplePlayerToARole}**`, value: `Edit with *${gameInstance.parameters.authorizeMultiplePlayerToARole ? "Unauthorize" : "Authorize"}* button below`, inline: true },
 
             { name: ` `, value: ` `, inline: false },
 
-            { name: `🕑 Game Status`, value: gameInstance.status.value, inline: true },
+            { name: `🕑 Game Status`, value: `${gameInstance.status.value ?? " "}`, inline: true },
             { name: ` `, value: ` `, inline: true },
-            { name: `⏮️ Last action made`, value: gameInstance.parameters.lastActionMade, inline: true },
+            { name: `⏮️ Last action made`, value: `${gameInstance.parameters.lastActionMade ?? " "}`, inline: true },
         ]);
 
     return embed
@@ -39,11 +40,11 @@ function getAdminButtons(gameInstance) {
     const rowButtons = new ActionRowBuilder();
     const rowSelect = new ActionRowBuilder();
     const choices = [
-        new SelectMenuOptionBuilder().setLabel("1").setValue("1"),
-        new SelectMenuOptionBuilder().setLabel("2").setValue("2"),
-        new SelectMenuOptionBuilder().setLabel("3").setValue("3"),
-        new SelectMenuOptionBuilder().setLabel("4").setValue("4"),
-        new SelectMenuOptionBuilder().setLabel("5").setValue("5"),
+        new StringSelectMenuOptionBuilder().setLabel("1").setValue("1"),
+        new StringSelectMenuOptionBuilder().setLabel("2").setValue("2"),
+        new StringSelectMenuOptionBuilder().setLabel("3").setValue("3"),
+        new StringSelectMenuOptionBuilder().setLabel("4").setValue("4"),
+        new StringSelectMenuOptionBuilder().setLabel("5").setValue("5"),
     ];
 
     switch (gameInstance.status) {
@@ -51,28 +52,28 @@ function getAdminButtons(gameInstance) {
         case Status.NOT_STARTED:
             rowButtons.addComponents([
                 new ButtonBuilder().setCustomId('admin-status-wait').setLabel('Save configuration').setStyle('Primary'), // Allow players to see their role before starting the game
-                new ButtonBuilder().setCustomId('admin-parameters-authorize').setLabel('Authorize').setStyle('Secondary'), // Authorize multiple players to a role
-                new ButtonBuilder().setCustomId('admin-parameters-impostersamount').setLabel('Set / Random').setStyle('Secondary'), // Set / Random
-                new ButtonBuilder().setCustomId('admin-teams-randomize').setLabel('Randomize teams').setStyle('Secondary'), // Randomize teams
-                new ButtonBuilder().setCustomId('admin-teams-reset').setLabel('Reset teams').setStyle('Secondary'), // Reset teams
+                new ButtonBuilder().setCustomId('admin-parameters-authorize').setLabel(`${gameInstance.parameters.authorizeMultiplePlayerToARole ? "Unauthorize" : "Authorize"}`).setStyle('Secondary'), // Authorize multiple players to a role
+                new ButtonBuilder().setCustomId('admin-parameters-impostersamount').setLabel('Set / Random').setStyle('Secondary') // Set / Random
             ]);
 
             rowSelect.addComponents([
-                new SelectMenuBuilder().setCustomId('admin-changeimposter').setPlaceholder('Select max amount of imposters').addOptions(choices) // Change max imposters
+                new StringSelectMenuBuilder().setCustomId('admin-changeimposter').setPlaceholder('Select max amount of imposters').addOptions(choices) // Change max imposters
             ]);
             break;
 
         case Status.WAITING_TO_START:
             rowSelect.addComponents([
                 new ButtonBuilder().setCustomId('admin-status-start').setLabel('Start game').setStyle('Primary'), // Start game
-                new ButtonBuilder().setCustomId('admin-roles-reroll').setLabel('Reroll the roles').setStyle('Primary'), // Start game
+                new ButtonBuilder().setCustomId('admin-roles-reroll').setLabel('Reroll roles').setStyle('Secondary'), // Reroll roles
+                new ButtonBuilder().setCustomId('admin-teams-randomize').setLabel('Randomize teams').setStyle('Secondary'), // Randomize teams
+                new ButtonBuilder().setCustomId('admin-teams-reset').setLabel('Reset teams').setStyle('Secondary') // Reset teams
             ]);
             break;
 
         case Status.STARTED:
             rowButtons.addComponents([
-                new ButtonBuilder().setCustomId('admin-status-pause').setLabel('Pause game').setStyle('Warn'), // Pause game
-                new ButtonBuilder().setCustomId('admin-status-stop').setLabel('End game').setStyle('Danger') // End game
+                new ButtonBuilder().setCustomId('admin-status-stop').setLabel('End game').setStyle('Danger'), // End game
+                new ButtonBuilder().setCustomId('admin-status-pause').setLabel('Pause game').setStyle('Secondary') // Pause game
             ]);
             break;
 
@@ -91,7 +92,10 @@ function getAdminButtons(gameInstance) {
             break;
     }
 
-    return [rowSelect, rowButtons]
+    const returnedArray = []
+    if (rowSelect.components.length > 0) returnedArray.push(rowSelect)
+    if (rowButtons.components.length > 0) returnedArray.push(rowButtons)
+    return returnedArray
 }
 
 module.exports = { getAdminEmbed, getAdminButtons };
