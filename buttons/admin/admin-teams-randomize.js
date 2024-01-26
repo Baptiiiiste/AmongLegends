@@ -6,7 +6,9 @@ module.exports = {
     name: "admin-teams-randomize",
     async runInteraction(client, interaction) {
 
+        interaction.deferUpdate();
         if(!client.gameInstance) return;
+        if(client.gameInstance.adminEmbed.id != interaction.message.interaction.id) return;
 
         const shuffledPlayers = shuffle([client.gameInstance.redTeam, client.gameInstance.blueTeam].flat());
 
@@ -24,8 +26,6 @@ module.exports = {
 
         const gameEmbed = getGameEmbed(client.gameInstance);
         const gameButtons = getGameButtons(client.gameInstance);
-
-        interaction.deferUpdate();
 
         await client.gameInstance.adminEmbed.edit({ embeds: [adminEmbed], components: adminButtons })
         await client.gameInstance.gameEmbed.edit({ embeds: [gameEmbed], components: gameButtons })

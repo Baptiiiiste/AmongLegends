@@ -5,7 +5,9 @@ module.exports = {
     name: "admin-teams-reset",
     async runInteraction(client, interaction) {
 
+        interaction.deferUpdate();
         if(!client.gameInstance) return;
+        if(client.gameInstance.adminEmbed.id != interaction.message.interaction.id) return;
 
         client.gameInstance.blueTeam = [];
         client.gameInstance.redTeam = [];
@@ -17,8 +19,6 @@ module.exports = {
 
         const gameEmbed = getGameEmbed(client.gameInstance);
         const gameButtons = getGameButtons(client.gameInstance);
-
-        interaction.deferUpdate();
 
         await client.gameInstance.adminEmbed.edit({ embeds: [adminEmbed], components: adminButtons })
         await client.gameInstance.gameEmbed.edit({ embeds: [gameEmbed], components: gameButtons })

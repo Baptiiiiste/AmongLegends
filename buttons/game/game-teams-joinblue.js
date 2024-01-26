@@ -6,7 +6,9 @@ module.exports = {
     name: "game-teams-joinblue",
     async runInteraction(client, interaction) {
 
-        if(!client.gameInstance) return;
+        interaction.deferUpdate();
+        if(!client.gameInstance || !client.gameInstance.gameEmbed) return;
+        if(client.gameInstance.gameEmbed.id != interaction.message.id) return;
 
         const blueTeam = client.gameInstance.blueTeam;
         const redTeam = client.gameInstance.redTeam;
@@ -15,8 +17,6 @@ module.exports = {
             interaction.reply({ content: "The blue team is full!", ephemeral: true });
             return;
         }
-
-        interaction.deferUpdate();
 
         if(blueTeam.some(player => player.discordUser == interaction.user)) return;
         if(redTeam.some(player => player.discordUser == interaction.user)) redTeam.splice(redTeam.findIndex(player => player.discordUser === interaction.user), 1);

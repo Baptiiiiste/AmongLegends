@@ -6,7 +6,9 @@ module.exports = {
     name: "game-teams-leave",
     async runInteraction(client, interaction) {
 
-        if(!client.gameInstance) return;
+        interaction.deferUpdate();
+        if(!client.gameInstance || !client.gameInstance.gameEmbed) return;
+        if(client.gameInstance.gameEmbed.id != interaction.message.id) return;
         if(client.gameInstance.status != Status.WAITING_TO_START) return;
 
         const redTeam = client.gameInstance.redTeam;
@@ -20,8 +22,6 @@ module.exports = {
             redTeam.splice(redTeam.findIndex(player => player.discordUser === interaction.user), 1);
             attributeRoles(client.gameInstance, redTeam);
         }
-
-        interaction.deferUpdate();
 
         const gameEmbed = getGameEmbed(client.gameInstance);
         const gameButtons = getGameButtons(client.gameInstance);

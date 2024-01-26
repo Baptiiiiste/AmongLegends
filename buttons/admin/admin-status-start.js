@@ -6,7 +6,9 @@ module.exports = {
     name: "admin-status-start",
     async runInteraction(client, interaction) {
 
+        interaction.deferUpdate();
         if(!client.gameInstance) return;
+        if(client.gameInstance.adminEmbed.id != interaction.message.interaction.id) return;
 
         if(!client.gameInstance.redTeam.length && !client.gameInstance.blueTeam.length) {
             interaction.reply({ content: "You need at least one player on a team to start the game!", ephemeral: true });
@@ -22,8 +24,6 @@ module.exports = {
 
         const gameEmbed = getGameEmbed(client.gameInstance);
         const gameButtons = getGameButtons(client.gameInstance);
-
-        interaction.deferUpdate();
 
         await client.gameInstance.adminEmbed.edit({ embeds: [adminEmbed], components: adminButtons })
         await client.gameInstance.gameEmbed.edit({ embeds: [gameEmbed], components: gameButtons })

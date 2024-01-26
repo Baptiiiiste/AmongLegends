@@ -2,7 +2,9 @@ module.exports = {
     name: "game-roles-get",
     async runInteraction(client, interaction) {
 
-        if(!client.gameInstance) return;
+        if(!client.gameInstance || !client.gameInstance.gameEmbed) return interaction.deferUpdate();
+        if(client.gameInstance.gameEmbed.id != interaction.message.id) return interaction.deferUpdate();
+
         const teams = client.gameInstance.redTeam.concat(client.gameInstance.blueTeam);
         const player = teams.find(player => player.discordUser === interaction.user);
 
