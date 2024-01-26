@@ -1,5 +1,6 @@
 const { getGameEmbed, getGameButtons } = require("../../utils/embeds/gameEmbed.js");
 const { Player } = require("../../models/Player.js");
+const { attributeRoles } = require("../../utils/roles/RolesManager.js");
 
 module.exports = {
     name: "game-teams-joinred",
@@ -21,6 +22,8 @@ module.exports = {
         if(blueTeam.some(player => player.discordUser == interaction.user)) blueTeam.splice(blueTeam.findIndex(player => player.discordUser === interaction.user), 1);
 
         redTeam.push(new Player(interaction.user));
+
+        attributeRoles(client.gameInstance, redTeam);
 
         const gameEmbed = getGameEmbed(client.gameInstance);
         const gameButtons = getGameButtons(client.gameInstance);

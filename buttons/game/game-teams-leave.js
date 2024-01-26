@@ -1,5 +1,6 @@
 const { getGameEmbed, getGameButtons } = require("../../utils/embeds/gameEmbed.js");
 const { Status } = require("../../models/Status.js");
+const { attributeRoles } = require("../../utils/roles/RolesManager.js");
 
 module.exports = {
     name: "game-teams-leave",
@@ -11,8 +12,14 @@ module.exports = {
         const redTeam = client.gameInstance.redTeam;
         const blueTeam = client.gameInstance.blueTeam;
 
-        if(blueTeam.some(player => player.discordUser == interaction.user)) blueTeam.splice(blueTeam.findIndex(player => player.discordUser === interaction.user), 1);
-        if(redTeam.some(player => player.discordUser == interaction.user)) redTeam.splice(redTeam.findIndex(player => player.discordUser === interaction.user), 1);
+        if(blueTeam.some(player => player.discordUser == interaction.user)){
+            blueTeam.splice(blueTeam.findIndex(player => player.discordUser === interaction.user), 1);
+            attributeRoles(client.gameInstance, blueTeam);
+        }
+        if(redTeam.some(player => player.discordUser == interaction.user)){
+            redTeam.splice(redTeam.findIndex(player => player.discordUser === interaction.user), 1);
+            attributeRoles(client.gameInstance, redTeam);
+        }
 
         interaction.deferUpdate();
 
