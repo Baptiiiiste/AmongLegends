@@ -26,7 +26,6 @@ module.exports = {
         interaction.deferUpdate();
 
         await client.gameInstance.adminEmbed.edit({ embeds: [adminEmbed], components: adminButtons })
-        
         await client.gameInstance.gameEmbed.edit({ embeds: [gameEmbed], components: gameButtons })
 
     }

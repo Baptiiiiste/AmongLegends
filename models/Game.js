@@ -19,7 +19,8 @@ class Game {
         maxImposters: 1,
         impostersAmount: "Set",
         authorizeMultiplePlayerToARole: false,
-        lastActionMade: "Click a button first"
+        lastActionMade: "Click a button first",
+        displayRoleButton: false
     }
 
     constructor(gameAdminDiscordInstance) {

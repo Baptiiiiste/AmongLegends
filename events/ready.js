@@ -13,7 +13,8 @@ module.exports = {
 
         Logger.client(`Logged in as ${client.user.tag} on ${guildsCount.size} server${guildsCount.size > 1 ? "s" : ""}`);
 
-        const devGuild = await client.guilds.cache.get('807658249728950292');
+        const devGuild = await client.guilds.cache.get('807658249728950292'); // dev
+        // const devGuild = await client.guilds.cache.get('316510146920710145'); // les copains
         devGuild.commands.set(client.commands.map(cmd => cmd));
     }
 }
