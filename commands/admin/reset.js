@@ -10,9 +10,11 @@ module.exports = {
 
     async runInteraction(client, interaction)  {
 
+        // TODO Stop sending private messages to the previous game's users
+
         client.gameInstance = new Game();
         // TODO Send a message to the channel to inform the players
-        interaction.reply({ content: `TMP: Game reset`, ephemeral: true });
+        await interaction.reply({ content: `TMP: Game reset`, ephemeral: true });
 
     }
 };

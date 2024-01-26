@@ -11,6 +11,8 @@ module.exports = {
 
     async runInteraction(client, interaction)  {
 
+        // TODO Stop sending private messages to the previous game's users
+
         // Create a new game instance
         client.gameInstance = new Game(interaction.user);
 
