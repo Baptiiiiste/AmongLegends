@@ -28,23 +28,32 @@ function getGameEmbed(gameInstance){
 function getGameButtons(gameInstance){
 
     const row = new ActionRowBuilder();
+    const secondRow = new ActionRowBuilder();
   
     if(gameInstance.status == Status.WAITING_TO_START){
       row.addComponents([
         new ButtonBuilder().setCustomId('game-teams-joinblue').setLabel('Join blue team').setStyle('Primary'), // Join blue team
         new ButtonBuilder().setCustomId('game-teams-joinred').setLabel('Join red team').setStyle('Danger'), // Join red team
-        new ButtonBuilder().setCustomId('game-roles-get').setLabel('Get your role').setStyle('Secondary'), // Get role
         new ButtonBuilder().setCustomId('game-teams-leave').setLabel('Leave game').setStyle('Secondary'), // Leave game
+
       ]);
+
+      if (gameInstance.parameters.displayRoleButton) {
+        secondRow.addComponents([
+          new ButtonBuilder().setCustomId('game-roles-get').setLabel('Get your role').setStyle('Success') // Get role
+        ]);
+        return [row, secondRow];
+      }
+
+      
+
     }else{
       row.addComponents([
         new ButtonBuilder().setCustomId('game-roles-get').setLabel('Get your role').setStyle('Secondary') // Get role
       ]);
     }
-  
     return [row];
 
-    
 }
 
 module.exports = { getGameEmbed, getGameButtons };

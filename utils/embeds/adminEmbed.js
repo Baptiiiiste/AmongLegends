@@ -62,8 +62,16 @@ function getAdminButtons(gameInstance) {
             break;
 
         case Status.WAITING_TO_START:
-            rowSelect.addComponents([
+            rowButtons.addComponents([
                 new ButtonBuilder().setCustomId('admin-status-start').setLabel('Start game').setStyle('Primary'), // Start game
+
+            ]);
+            if (!gameInstance.parameters.displayRoleButton) {
+                rowButtons.addComponents([
+                    new ButtonBuilder().setCustomId('admin-roles-allow').setLabel('Display player\'s role').setStyle('Success'), // Display get role button
+                ]);
+            }
+            rowButtons.addComponents([
                 new ButtonBuilder().setCustomId('admin-roles-reroll').setLabel('Reroll roles').setStyle('Secondary'), // Reroll roles
                 new ButtonBuilder().setCustomId('admin-teams-randomize').setLabel('Randomize teams').setStyle('Secondary'), // Randomize teams
                 new ButtonBuilder().setCustomId('admin-teams-reset').setLabel('Reset teams').setStyle('Secondary') // Reset teams
