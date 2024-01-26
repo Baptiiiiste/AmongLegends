@@ -11,9 +11,11 @@ module.exports = {
         const shuffledPlayers = shuffle([client.gameInstance.redTeam, client.gameInstance.blueTeam].flat());
 
         // Split shuffledPlayers in two and assign to red and blue team, if uneven, add to blue team
-        const half = Math.ceil(shuffledPlayers.length / 2);
-        client.gameInstance.blueTeam = shuffledPlayers.splice(0, half);
-        client.gameInstance.redTeam = shuffledPlayers;
+        if(shuffledPlayers.length) {
+            const half = Math.ceil(shuffledPlayers.length / 2);
+            client.gameInstance.blueTeam = shuffledPlayers.splice(0, half);
+            client.gameInstance.redTeam = shuffledPlayers;
+        }
 
         client.gameInstance.parameters.lastActionMade = `Randomized teams`
 
