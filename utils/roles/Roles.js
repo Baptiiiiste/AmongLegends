@@ -1,7 +1,7 @@
 const crewmateRoles = [
     {
         type: 'Crewmate',
-        name: 'Support',
+        name: 'Support 💫',
         description:
           'A la fin de la partie, avoir le plus d\'assists que tous les autres joueurs (Si support, ce nombre est divisé par 2)',
         weight: 0.1,
@@ -9,7 +9,7 @@ const crewmateRoles = [
     },
     {
         type: 'Crewmate',
-        name: 'Splitpusher',
+        name: 'Splitpusher 🏰',
         description:
           'Faire tout ce qui est possible pour détruire le plus de tours, inhibiteurs et tuer le plus de drakes, barons et héros ennemis que vos alliers.',
         weight: 0.1,
@@ -17,7 +17,7 @@ const crewmateRoles = [
     },
     {
       type: 'Crewmate',
-      name: 'Sardoche',
+      name: 'Sardoche 🤬',
       description:
         'Raler sur les autres joueurs et les blâmer pour vos morts et vos défaites',
       weight: 0.1,
@@ -25,7 +25,7 @@ const crewmateRoles = [
   },
     {
       type: 'Crewmate',
-      name: 'Taupe',
+      name: 'Taupe 🕵️‍♂️',
       description:
         'A la fin de la partie, avoir moins de participation (kills + assists) que tous les autres joueurs',
       weight: 0.15,
@@ -33,7 +33,7 @@ const crewmateRoles = [
     },
     {
       type: 'Crewmate',
-      name: 'Faussaire',
+      name: 'Faussaire ⚔️',
       description:
         'A la fin de la partie, avoir plus de dégats et moins de morts que tous les autres joueurs',
       weight: 0.2,
@@ -41,7 +41,7 @@ const crewmateRoles = [
     },
     {
       type: 'Crewmate',
-      name: 'Fermier',
+      name: 'Fermier 🌾',
       description:
         'A la fin de la partie, avoir tué plus de sbires  que tous les autres joueurs (si support: ce nombre est multiplié par 2)',
       weight: 0.15,
@@ -49,7 +49,7 @@ const crewmateRoles = [
     },
     {
       type: 'Crewmate',
-      name: 'Inter',
+      name: 'Inter 🤡',
       description:
         'A la fin de la partie, être mort plus de fois que tous les autres joueurs',
       weight: 0.075,
@@ -57,23 +57,7 @@ const crewmateRoles = [
     },
     {
       type: 'Crewmate',
-      name: 'Canard',
-      description:
-        'Toutes les 5 minutes, suivre les ordres reçus par messages privés.',
-      weight: 0.1,
-      image: 'duck.png',
-    },
-    {
-      type: 'Crewmate',
-      name: 'Explorateur',
-      description:
-        'Toutes les 5 minutes, se rendre à la destination indiquée par message privé en restant vivant.',
-      weight: 0.1,
-      image: 'explorer.png',
-    },
-    {
-      type: 'Crewmate',
-      name: 'Fanatic',
+      name: 'Fanatic 🍸',
       description:
         'Rester uniquement sur ta lane pendant les 15 premières minutes de jeu (si jungler: interdiction de gank durant ce temps).',
       weight: 0.15,
@@ -81,18 +65,54 @@ const crewmateRoles = [
     },
     {
       type: 'Crewmate',
-      name: 'Berserker',
+      name: 'Berserker ☠️',
       description:
         "En cas de dégats reçus de la part d'un ennemi, combattre jusqu'à la mort.",
       weight: 0.075,
       image: 'berserker.png',
+    },
+    {
+      type: 'Crewmate',
+      name: 'Canard 🦆',
+      description:
+        'Toutes les 5 minutes, suivre les ordres reçus par messages privés.',
+      weight: 0.1,
+      image: 'duck.png',
+      orders: [
+        "Dans les 30 secondes, utilise tout ton kit de sorts! (sauf les sorts d'invocateurs)",
+        'Dans les 30 secondes, utilise ton deuxième summoner spell!',
+        'Dans les 30 secondes, utilise ton premier summoner spell!',
+        'Casse deux plantes de la jungle maintenant!',
+        'Pousse ta team à faire un objectif!',
+        'Vole 10 sbires à un de tes alliés',
+        'Dive dès que possible!',
+        'Back maintenant!',
+      ]
+    },
+    {
+      type: 'Crewmate',
+      name: 'Explorateur 🧭',
+      description:
+        'Toutes les 5 minutes, se rendre à la destination indiquée par message privé en restant vivant.',
+      weight: 0.1,
+      image: 'explorer.png',
+      orders: [
+        'Tête la première, vérifie le contenu de 5 hautes herbes du côté ennemi (sans vision)',
+        "Rends toi dans l'alcolve de la botlane!",
+        "Rends toi dans l'alcolve de la toplane!",
+        'Dis bonjour au Baron/Heraut!',
+        'Dis bonjour au Dragon!',
+        'Va visiter le blue ennemi!',
+        'Va visiter le red ennemi!',
+        'Visite la base ennemi!',
+      ]
     },
   ]
   
   const imposterRoles = [
     {
       type: 'Imposter',
-      name: 'Imposteur',
+      name: 'Imposteur 👿',
       description: 'Perdre la game, sans te faire repérer!',
       weight: 1,
       image: 'imposter.png',
@@ -101,7 +121,7 @@ const crewmateRoles = [
   
   const chameleonRole = {
     type: '',
-    name: 'Cameleon',
+    name: 'Cameleon 🦎',
     description: 'Gagner ou perdre la game en fonction du camps reçu en DM',
     image: 'chameleon.png',
     chanceToReplaceImposterWithChameleon: 0.1
