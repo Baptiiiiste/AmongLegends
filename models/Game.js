@@ -14,6 +14,8 @@ class Game {
     redTeam = []
 
     startedGameTime = null
+    intervalIds = []
+    chameleonIntervals = []
 
     parameters = {
         maxImposters: 1,

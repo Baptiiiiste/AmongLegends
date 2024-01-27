@@ -1,4 +1,6 @@
 const { Game } = require("../../models/Game");
+const { stopOrderPlayers } = require("../../utils/roles/OrdersManager");
+const { stopChameleonPlayers } = require("../../utils/roles/ChameleonManager");
 
 module.exports = {
     name: 'reset',
@@ -10,9 +12,10 @@ module.exports = {
 
     async runInteraction(client, interaction)  {
 
-        // TODO Stop sending private messages to the previous game's users
-
+        stopOrderPlayers(client.gameInstance.intervalIds)
+        stopChameleonPlayers(client.gameInstance.chameleonIntervals)
         client.gameInstance = new Game();
+
         // TODO Send a message to the channel to inform the players
         await interaction.reply({ content: `TMP: Game reset`, ephemeral: true });
 

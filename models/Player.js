@@ -5,6 +5,8 @@ class Player {
     currentGameOrders = []
     votedPlayers = []
 
+    typeChanges = []
+
     constructor(discordUser) {
         this.discordUser = discordUser;
     }

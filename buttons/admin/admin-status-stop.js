@@ -1,6 +1,8 @@
 const { getAdminEmbed, getAdminButtons } = require("../../utils/embeds/adminEmbed.js");
 const { getGameEmbed, getGameButtons } = require("../../utils/embeds/gameEmbed.js");
 const { Status } = require("../../models/Status.js");
+const { stopOrderPlayers } = require("../../utils/roles/OrdersManager.js");
+const { stopChameleonPlayers } = require("../../utils/roles/ChameleonManager.js");
 
 module.exports = {
     name: "admin-status-stop",
@@ -12,6 +14,8 @@ module.exports = {
 
         client.gameInstance.status = Status.FINISHED;
         client.gameInstance.startedGameTime = null;
+        stopOrderPlayers(client.gameInstance.intervalIds)
+        stopChameleonPlayers(client.gameInstance.chameleonIntervals)
         client.gameInstance.parameters.lastActionMade = `Set status to **${client.gameInstance.status.value}**`
 
         const adminEmbed = getAdminEmbed(client.gameInstance);

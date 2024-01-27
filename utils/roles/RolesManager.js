@@ -51,8 +51,15 @@ function attributeImposterRoles(amount) {
 
     const roles = [];
     for (let i = 0; i < amount; i++) {
-        getRandomFloat(0, 1) <= chameleonRole.chanceToReplaceImposterWithChameleon ? roles.push(chameleonRole) : roles.push(getWeightedRandomRole(imposterRoles));
+        if (getRandomFloat(0, 1) <= chameleonRole.chanceToReplaceImposterWithChameleon) {
+            const chameleon = chameleonRole;
+            chameleon.type = getRandomInt(0, 1) === 0 ? "Crewmate" : "Imposter";
+            roles.push(chameleon)
+        } else {
+            roles.push(getWeightedRandomRole(imposterRoles));
+        }
     }
+
     return roles;
     
 }

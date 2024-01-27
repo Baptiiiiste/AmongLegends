@@ -1,5 +1,6 @@
 const crewmateRoles = [
     {
+        id: "support",
         type: 'Crewmate',
         name: 'Support 💫',
         description:
@@ -8,6 +9,7 @@ const crewmateRoles = [
         image: 'support.png',
     },
     {
+        id: "splitpusher",
         type: 'Crewmate',
         name: 'Splitpusher 🏰',
         description:
@@ -16,6 +18,7 @@ const crewmateRoles = [
         image: 'splitpusher.png',
     },
     {
+      id: "sardoche",
       type: 'Crewmate',
       name: 'Sardoche 🤬',
       description:
@@ -24,6 +27,7 @@ const crewmateRoles = [
       image: 'sardoche.png',
   },
     {
+      id: "mole",
       type: 'Crewmate',
       name: 'Taupe 🕵️‍♂️',
       description:
@@ -32,6 +36,7 @@ const crewmateRoles = [
       image: 'mole.png',
     },
     {
+      id: "faker",
       type: 'Crewmate',
       name: 'Faussaire ⚔️',
       description:
@@ -40,6 +45,7 @@ const crewmateRoles = [
       image: 'faker.png',
     },
     {
+      id: "farmer",
       type: 'Crewmate',
       name: 'Fermier 🌾',
       description:
@@ -48,6 +54,7 @@ const crewmateRoles = [
       image: 'farmer.png',
     },
     {
+      id: "inter",
       type: 'Crewmate',
       name: 'Inter 🤡',
       description:
@@ -56,6 +63,7 @@ const crewmateRoles = [
       image: 'inter.png',
     },
     {
+      id: "fanatic",
       type: 'Crewmate',
       name: 'Fanatic 🍸',
       description:
@@ -64,6 +72,7 @@ const crewmateRoles = [
       image: 'fanatic.png',
     },
     {
+      id: "berserker",
       type: 'Crewmate',
       name: 'Berserker ☠️',
       description:
@@ -72,6 +81,7 @@ const crewmateRoles = [
       image: 'berserker.png',
     },
     {
+      id: "duck",
       type: 'Crewmate',
       name: 'Canard 🦆',
       description:
@@ -90,6 +100,7 @@ const crewmateRoles = [
       ]
     },
     {
+      id: "explorer",
       type: 'Crewmate',
       name: 'Explorateur 🧭',
       description:
@@ -111,6 +122,7 @@ const crewmateRoles = [
   
   const imposterRoles = [
     {
+      id: "imposter",
       type: 'Imposter',
       name: 'Imposteur 👿',
       description: 'Perdre la game, sans te faire repérer!',
@@ -120,6 +132,7 @@ const crewmateRoles = [
   ]
   
   const chameleonRole = {
+    id: "chameleon",
     type: '',
     name: 'Cameleon 🦎',
     description: 'Gagner ou perdre la game en fonction du camps reçu en DM',
