@@ -13,8 +13,6 @@ function getGameEmbed(gameInstance){
       { name: "🔵 Blue team", value: `${gameInstance.blueTeam.length ? gameInstance.blueTeam.map(u => u.discordUser).join("\n") : " "}`, inline: true },
       { name: "🔴 Red team", value: `${gameInstance.redTeam.length ? gameInstance.redTeam.map(u => u.discordUser).join("\n") : " "}`, inline: true },
 
-      // // TODO Add winner if game is finished
-
       { name: ` `, value: ` `, inline: false },
 
       { name: `🕑 Game Status`, value: gameInstance.status.value, inline: true },

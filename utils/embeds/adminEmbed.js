@@ -81,13 +81,11 @@ function getAdminButtons(gameInstance) {
         case Status.STARTED:
             rowButtons.addComponents([
                 new ButtonBuilder().setCustomId('admin-status-stop').setLabel('End game').setStyle('Danger'), // End game
-                new ButtonBuilder().setCustomId('admin-status-pause').setLabel('Pause game').setStyle('Secondary') // Pause game
             ]);
             break;
 
         case Status.PAUSED:
             rowButtons.addComponents([
-                new ButtonBuilder().setCustomId('admin-status-unpause').setLabel('Unpause game').setStyle('Primary'), // Unpause game
                 new ButtonBuilder().setCustomId('admin-status-stop').setLabel('End game').setStyle('Danger') // End game
             ]);
             break;
