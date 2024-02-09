@@ -6,8 +6,9 @@ module.exports = {
     name: "admin-status-wait",
     async runInteraction(client, interaction) {
 
-        if(!client.gameInstance) return interaction.deferUpdate();;
-        if(client.gameInstance.adminEmbed.id != interaction.message.interaction.id) return interaction.deferUpdate();;
+        interaction.deferUpdate();
+        if(!client.gameInstance) return ;
+        if(client.gameInstance.adminEmbed.id != interaction.message.interaction.id) return;
 
         client.gameInstance.status = Status.WAITING_TO_START;
         client.gameInstance.parameters.lastActionMade = `Set status to **${client.gameInstance.status.value}**`
