@@ -11,17 +11,20 @@ module.exports = {
 
     async runInteraction(client, interaction)  {
 
-        // TODO Stop sending private messages to the previous game's users
+        if(client.gameInstance){
+            stopOrderPlayers(client.gameInstance.intervalIds)
+            stopChameleonPlayers(client.gameInstance.chameleonIntervals)
+        }
 
-        // Create a new game instance
         client.gameInstance = new Game(interaction.user);
 
         const adminEmbed = getAdminEmbed(client.gameInstance);
         const adminButtons = getAdminButtons(client.gameInstance);
 
-        // Send then store the embed to edit it later
-        await interaction.reply({ embeds: [adminEmbed], components: adminButtons, ephemeral: true })
-            .then(message => client.gameInstance.adminEmbed = message);
+        interaction.reply({ embeds: [adminEmbed], components: adminButtons, ephemeral: true })
+            .then(message => {
+                client.gameInstance.adminEmbed = message
+            });
 
     }
 };
