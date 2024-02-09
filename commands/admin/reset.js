@@ -12,12 +12,14 @@ module.exports = {
 
     async runInteraction(client, interaction)  {
 
-        stopOrderPlayers(client.gameInstance.intervalIds)
-        stopChameleonPlayers(client.gameInstance.chameleonIntervals)
+        if(client.gameInstance){
+            stopOrderPlayers(client.gameInstance.intervalIds)
+            stopChameleonPlayers(client.gameInstance.chameleonIntervals)
+        }
+
         client.gameInstance = new Game();
 
-        // TODO Send a message to the channel to inform the players
-        await interaction.reply({ content: `TMP: Game reset`, ephemeral: true });
+        await interaction.reply({ content: `✅ The game has been reset` });
 
     }
 };
