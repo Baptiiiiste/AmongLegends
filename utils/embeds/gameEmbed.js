@@ -9,14 +9,23 @@ function getGameEmbed(gameInstance){
     .setDescription(`Wait for ${gameInstance.gameAdminDiscordInstance} to start the game`)
     .addFields([
       { name: ` `, value: ` `, inline: false },
+    ]);
 
-      { name: "🔵 Blue team", value: `${gameInstance.blueTeam.length ? gameInstance.blueTeam.map(u => u.discordUser).join("\n") : " "}`, inline: true },
-      { name: "🔴 Red team", value: `${gameInstance.redTeam.length ? gameInstance.redTeam.map(u => u.discordUser).join("\n") : " "}`, inline: true },
+    if(!gameInstance.arePlayersVoting){
+      embed.addFields([
+        { name: "🔵 Blue team", value: `${gameInstance.blueTeam.length ? gameInstance.blueTeam.map(u => u.discordUser).join("\n") : " "}`, inline: true },
+        { name: "🔴 Red team", value: `${gameInstance.redTeam.length ? gameInstance.redTeam.map(u => u.discordUser).join("\n") : " "}`, inline: true },
+      ])
+    }else {
+      embed.addFields([
+        { name: "🔵 Blue team", value: `${gameInstance.blueTeam.length ? gameInstance.blueTeam.map(u => `${u.discordUser} (${u.votedPlayers.length != gameInstance.blueTeam.length - 1 ? "Voting..." : "Has voted"})`).join("\n") : " "}`, inline: true },
+        { name: "🔴 Red team", value: `${gameInstance.redTeam.length ? gameInstance.redTeam.map(u => `${u.discordUser} (${u.votedPlayers.length != gameInstance.redTeam.length - 1 ? "Voting..." : "Has voted"})`).join("\n") : " "}`, inline: true },
+      ])
+    }
 
+    embed.addFields([
       { name: ` `, value: ` `, inline: false },
-
       { name: `🕑 Game Status`, value: gameInstance.status.value, inline: true },
-
     ]);
   
     return embed

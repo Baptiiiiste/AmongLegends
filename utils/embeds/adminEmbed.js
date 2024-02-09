@@ -91,8 +91,12 @@ function getAdminButtons(gameInstance) {
             break;
 
         case Status.FINISHED:
+            if(!gameInstance.arePlayersVoting){
+                rowButtons.addComponents([
+                    new ButtonBuilder().setCustomId('admin-vote').setLabel('Start votes').setStyle('Primary'), // Start votes
+                ]);
+            }
             rowButtons.addComponents([
-                new ButtonBuilder().setCustomId('admin-vote').setLabel('Start votes').setStyle('Primary'), // Start votes
                 new ButtonBuilder().setCustomId('admin-status-new').setLabel('New game').setStyle('Secondary') // New game
             ]);
             break;
