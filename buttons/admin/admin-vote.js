@@ -2,6 +2,7 @@ const { getAdminEmbed, getAdminButtons } = require('../../utils/embeds/adminEmbe
 const { getGameEmbed, getGameButtons } = require('../../utils/embeds/gameEmbed');
 const { chameleonRole, imposterRoles, crewmateRoles } = require('../../utils/roles/Roles');
 const { ActionRowBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder } = require("discord.js");
+const { Vote } = require("../../models/Vote");
 
 module.exports = {
     name: "admin-vote",
@@ -18,18 +19,25 @@ module.exports = {
         const blueTeam = client.gameInstance.blueTeam;
         const redTeam = client.gameInstance.redTeam;
         const roles = [...imposterRoles, ...crewmateRoles, chameleonRole];
-        const SelectMenuRoles = roles.map(role => new StringSelectMenuOptionBuilder().setLabel(role.name).setValue(role.id));
 
         for (const team of [blueTeam, redTeam]) {
             team.forEach(userToSendMessage => {
                 const SelectMenuList = new ActionRowBuilder();
+
                 team.filter(user => user.discordUser !== userToSendMessage.discordUser).forEach(user => {
+                    const SelectMenuRoles = roles.map(role => {
+                        const vote = new Vote(user.discordUser.id, role.id);
+                        const voteValue = JSON.stringify(vote);
+                        return new StringSelectMenuOptionBuilder().setLabel(role.name).setValue(voteValue);
+                    });                    
+                    
                     SelectMenuList.addComponents([
                         new StringSelectMenuBuilder().setCustomId('game-vote').setPlaceholder(`Guess ${user.discordUser.username}'s role`).addOptions(SelectMenuRoles)
-                    ]);
+                    ]);    
                 });
         
                 if (SelectMenuList.components.length > 0) userToSendMessage.discordUser.send({ content: `It's time to vote!`, components: [SelectMenuList] });
+                else userToSendMessage.hasVoted = true;
             });
         }
 

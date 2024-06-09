@@ -4,6 +4,7 @@ class Player {
     currentRole = null
     currentGameOrders = []
     votedPlayers = []
+    hasVoted = false
 
     typeChanges = []
 

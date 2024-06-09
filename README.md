@@ -15,3 +15,8 @@ DISCORD_TOKEN=**your discord bot token**
 4. Run `node .` or `node index.js` to start the bot
 
 
+## TODO
+
+- Handle the vote
+- Fix the bug that when an embed exceed 15 minutes, it cannot be edited
+- Make tha bot handle more than one game at a time

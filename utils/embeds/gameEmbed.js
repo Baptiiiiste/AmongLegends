@@ -6,10 +6,13 @@ function getGameEmbed(gameInstance){
   const embed = new EmbedBuilder()
     .setColor(Colors.Blue)
     .setTitle("Among Legends")
-    .setDescription(`Wait for ${gameInstance.gameAdminDiscordInstance} to start the game`)
     .addFields([
       { name: ` `, value: ` `, inline: false },
     ]);
+
+    if(gameInstance.status == Status.WAITING_TO_START){
+      embed.setDescription(`Wait for ${gameInstance.gameAdminDiscordInstance} to start the game`);
+    }
 
     if(!gameInstance.arePlayersVoting){
       embed.addFields([
@@ -18,8 +21,8 @@ function getGameEmbed(gameInstance){
       ])
     }else {
       embed.addFields([
-        { name: "🔵 Blue team", value: `${gameInstance.blueTeam.length ? gameInstance.blueTeam.map(u => `${u.discordUser} (${u.votedPlayers.length != gameInstance.blueTeam.length - 1 ? "Voting..." : "Has voted"})`).join("\n") : " "}`, inline: true },
-        { name: "🔴 Red team", value: `${gameInstance.redTeam.length ? gameInstance.redTeam.map(u => `${u.discordUser} (${u.votedPlayers.length != gameInstance.redTeam.length - 1 ? "Voting..." : "Has voted"})`).join("\n") : " "}`, inline: true },
+        { name: "🔵 Blue team", value: `${gameInstance.blueTeam.length ? gameInstance.blueTeam.map(u => `${u.discordUser} (${u.hasVoted ? "Has voted" : "Voting..."})`).join("\n") : " "}`, inline: true },
+        { name: "🔴 Red team", value: `${gameInstance.redTeam.length ? gameInstance.redTeam.map(u => `${u.discordUser} (${u.hasVoted ? "Has voted" : "Voting..."})`).join("\n") : " "}`, inline: true },
       ])
     }
 
