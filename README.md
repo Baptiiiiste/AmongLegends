@@ -1,5 +1,7 @@
 # AmongLegends
 
+# Discord bot under development
+
 Check the original version [here](https://github.com/alexandrelam/among-legends). \
 This is a personal rework of the bot, with some extra features.
 
