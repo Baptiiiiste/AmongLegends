@@ -1,7 +1,7 @@
 {
   "name": "AmongLegends",
   "version": "1.0.0",
-  "description": "",
+  "description": "Discord bot to play Among Legends (Mix of Among us & League of Legends)",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
